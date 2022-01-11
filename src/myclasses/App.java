@@ -29,7 +29,6 @@ public class App {
     private SaverToBase saverToBase = new SaverToBase();
     private List<Income> incomes = new ArrayList<>();
     private Keepeing keeper;
-
     Income income = new Income();
 
     
@@ -52,10 +51,10 @@ public class App {
            System.out.println("4: Добавить покупателя");
            System.out.println("5: Список Покупателей");
            System.out.println("6: Купить обувь");
-           System.out.println("7: Доход магазина за все время работы");
+           System.out.println("7: Доход магазина за месяц");
            System.out.println("8: Изменить обувь");
            System.out.println("9: Изменить покупателя");
-           System.out.println("10: Дохот за всё время");
+           System.out.println("10: Дохот ");
            int task = getNumber();
             switch (task) {
                 case 1:
@@ -200,11 +199,11 @@ private void givenShoes() {
     if(purchase.getCustomer().getMoney()>=purchase.getShoes().getPrice()){
         System.out.println("-----------------------------");
         System.out.printf("Кроссовки %s купил %s %s за %s евро %s%n",
-        purchase.getShoes().getShoesName(),
-        purchase.getCustomer().getFirstname(),
-        purchase.getCustomer().getLastname(),
-        purchase.getShoes().getPrice(),
-        purchase.getGivenShoes()
+                    purchase.getShoes().getShoesName(),
+                    purchase.getCustomer().getFirstname(),
+                    purchase.getCustomer().getLastname(),
+                    purchase.getShoes().getPrice(),
+                    purchase.getGivenShoes()
         );
         purchase.getCustomer().setMoney(purchase.getCustomer().getMoney()-purchase.getShoes().getPrice());
         income.setGeneralMoney(income.getGeneralMoney()+purchase.getShoes().getPrice());
@@ -240,7 +239,7 @@ private void givenShoes() {
         }
         if (n<1) {
             System.out.println("Нет зарегистрированных пользователей");
-            return;
+            
         }
         System.out.print("Выберите номер пользователя: ");
         int numberUser= getNumber();
@@ -250,6 +249,7 @@ private void givenShoes() {
             System.out.println("1: Изменить имя пользователя");
             System.out.println("2: Изменить фамилию пользователя");
             System.out.println("3: Изменить номер пользователя");
+            System.out.println("4: Добваление денег");
             System.out.println("Выберите номер параметра, который хотите изменить: ");
             int num=getNumber();
             switch(num){
@@ -272,6 +272,12 @@ private void givenShoes() {
                     System.out.print("Введите новый номер пользователя: ");
                     String newPhone=scanner.nextLine();
                     customers.get(numberUser-1).setPhone(newPhone);
+                    keeper.saveCustomers(customers);
+                    break;
+                case 4:
+                    System.out.println("Введите сумму для добавленмя денег: ");
+                    int addMoney = scanner.nextInt(); scanner.nextLine();
+                    customers.get(numberUser-1).setMoney(customers.get(numberUser-1).getMoney()+addMoney);
                     keeper.saveCustomers(customers);
                     break;
             }
@@ -300,7 +306,7 @@ private void givenShoes() {
         String repeat="yes";
         do{
             System.out.println("0: Выход");
-            System.out.println("1: Изменить размер обуви");
+            System.out.println("1: Изменить название обуви");
             System.out.println("2: Изменить цену обуви");
             System.out.println("3: Изменить количество экземпляров");
             System.out.println("Выберите номер параметра, который хотите изменить: ");
